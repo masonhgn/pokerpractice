@@ -1,4 +1,4 @@
-from multiway.Range import Range
+from Range import Range
 import common
 
 class RangeManager:

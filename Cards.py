@@ -1,4 +1,4 @@
-
+from itertools import combinations, product
 
 
 
@@ -39,3 +39,58 @@ class Cards:
 		rank2, suit2 = hand[2], hand[3]
 		if suit1 == suit2: return f"{rank1}{rank2}s" if rank1 >= rank2 else f"{rank2}{rank1}s"
 		else: return f"{rank1}{rank2}o" if rank1 >= rank2 else f"{rank2}{rank1}o"
+
+
+	def generate_deck(self):
+		suits = ['h', 'd', 'c', 's']
+		ranks = ['2', '3', '4', '5', '6', '7', '8', '9', 'T', 'J', 'Q', 'K', 'A']
+		deck = [rank + suit for rank in ranks for suit in suits]
+		return deck
+	
+
+	def get_specific_hands(self, generic_hand, used_cards):
+		suits = ['h', 'd', 'c', 's']
+		ranks = {'A': 'A', 'K': 'K', 'Q': 'Q', 'J': 'J', 'T': 'T',
+				'9': '9', '8': '8', '7': '7', '6': '6', '5': '5',
+				'4': '4', '3': '3', '2': '2'}
+		generic_rank1 = generic_hand[0]
+		generic_rank2 = generic_hand[1]
+		suited = 's' in generic_hand
+		offsuit = 'o' in generic_hand
+		pairs = generic_rank1 == generic_rank2 and 'o' not in generic_hand and 's' not in generic_hand
+
+		possible_hands = []
+
+		if pairs:
+			rank = generic_rank1
+			available_suits = [s for s in suits]
+			for suit1 in suits:
+				for suit2 in suits:
+					if suit2 != suit1:
+						card1 = rank + suit1
+						card2 = rank + suit2
+						if card1 not in used_cards and card2 not in used_cards:
+							possible_hands.append((card1, card2))
+		else:
+			rank1 = generic_rank1
+			rank2 = generic_rank2
+			for suit1 in suits:
+				for suit2 in suits:
+					if suited and suit1 != suit2:
+						continue
+					if offsuit and suit1 == suit2:
+						continue
+					card1 = rank1 + suit1
+					card2 = rank2 + suit2
+					if card1 not in used_cards and card2 not in used_cards and card1 != card2:
+						possible_hands.append((card1, card2))
+
+		return possible_hands
+	
+
+
+
+# if __name__ == "__main__":
+# 	c = Cards()
+# 	hands = c.get_specific_hands('A6o',['Ad','6h'])
+# 	print(hands)
