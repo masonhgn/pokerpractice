@@ -8,7 +8,21 @@ from common import hand_rankings
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
 if __name__ == "__main__":
+    pass
     # test_range = Range()
     # test_range.load_default_uniform_range()
 
@@ -46,18 +60,17 @@ if __name__ == "__main__":
 
 
 
-    test_range = Range('first_range.json')
+    # test_range = Range('first_range.json')
 
-    history = [
-        Action('villain','bet',5,'SB'),
-        Action('hero','check_or_fold',10,'BB'),
-    ]
+    # history = [
+    #     Action('villain','bet',5,'SB'),
+    #     Action('hero','check_or_fold',10,'BB'),
+    # ]
 
-    generic, specific = sample_hand_from_range(test_range,history,'hero', [])
-    print(generic, specific)
-
-
-
+    # generic, specific = sample_hand_from_range(test_range,history,'hero', [])
+    # print(generic, specific)
+    # outcome = evaluate_hands('5d2d','3d7d',['Ad','Ks','6c','6h','Qd'])
+    # print(outcome)
 
     
 

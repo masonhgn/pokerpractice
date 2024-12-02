@@ -1,5 +1,5 @@
 from itertools import combinations, product
-
+from treys import Card, Evaluator
 
 
 class Cards:
@@ -7,6 +7,7 @@ class Cards:
 
 		#initialize deck
 		self.deck = []
+		self.evaluator = Evaluator()
 		for suit in "cdhs":
 			for rank in "A23456789TJQK":
 				self.deck.append(rank+suit)
@@ -87,6 +88,19 @@ class Cards:
 
 		return possible_hands
 	
+
+	def evaluate_hands(self, hand1: str, hand2: str, board: list[str]) -> str:
+
+		hand1_cards = [Card.new(hand1[0]), Card.new(hand1[1])]
+		hand2_cards = [Card.new(hand2[0]), Card.new(hand2[1])]
+		board_cards = [Card.new(card) for card in board]
+
+		hand1_score = self.evaluator.evaluate(board_cards, hand1_cards)
+		hand2_score = self.evaluator.evaluate(board_cards, hand2_cards)
+
+		if hand1_score < hand2_score: return "hand1"
+		elif hand1_score > hand2_score: return "hand2"
+		return "split"
 
 
 
