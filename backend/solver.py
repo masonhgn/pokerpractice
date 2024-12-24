@@ -462,7 +462,7 @@ class Solver:
         """
         @params
         state : dict
-            k=game state attribute, v=value of that attribute. stores the current state;
+            k=game state attribute, v=value of that attribute. stores the current state,
             current bet, current pot, and both players' stacks.
         history : list[Action]
             a list of Action objects which represent actions by either player

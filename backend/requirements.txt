@@ -1,2 +1,3 @@
 poker
 treys
+numpy
